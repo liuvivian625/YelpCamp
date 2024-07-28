@@ -20,7 +20,7 @@ const helmet = require('helmet');
 const MongoStore = require('connect-mongo');
 const dbUrlLocal = process.env.DB_URL_LOCAL;
 
-/*
+
 //Deploy: Mongo Altas setting
 const dbUrl = process.env.DB_URL;
 const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
@@ -36,8 +36,8 @@ async function run() {
   }
 }
 run().catch(console.dir);
-*/
 
+/*
 mongoose.connect(dbUrlLocal)
     .then(() => {
         console.log("MONGO CONNECTION OPEN!!!")
@@ -46,7 +46,7 @@ mongoose.connect(dbUrlLocal)
         console.log("OH NO MONGO CONNECTION ERROR!!!!")
         console.log(err)
     });
-
+*/
 
 
 const usersRoutes = require('./routes/users');
