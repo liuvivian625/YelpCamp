@@ -1,0 +1,68 @@
+<!-- 创建一个新campground -->
+<% layout('layouts/boilerplate') %>
+<div class="container py-3">
+    <h1 class="text-center">New Campground</h1>
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-sm-12">
+            <!-- method是post，需设置post route-->
+            <!-- action 与 post route 的路径是一样的-->
+            <!-- enctype="multipart/form-data" 表单数据会以分段形式编码，适用于包含文件上传的表单-->
+            <form action="/campgrounds" method="post" novalidate class="needs-validation" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <!-- input中的id与label中for相对应，使得点击标签文本时光标会自动定位到这个输入框-->
+                    <!-- name="campground[title]" 为这个输入控件设置名称 -->
+                    <!-- camground[title] 可以方便地将多个相关的数据组织成一个对象。-->
+                    <!-- 在这种情况下，服务器接收到的数据将会是一个包含 title 属性的 campground 对象。-->
+                    <input type="text" class="form-control" id="title" name="campground[title]" required>
+                    <div class="invalid-feedback">
+                        Please enter a title.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <!-- input 中加required 表示该input必须有内容，与bootstrap的validate结合使用-->
+                    <input type="text" class="form-control" id="location" name="campground[location]" required>
+                    <!-- invalid-feedback 或valid-feedback必须紧跟input-->
+                    <div class="invalid-feedback">
+                        Please enter a location, format: city, state.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">$</span>
+                        <input type="number" min="0" class="form-control" placeholder="0.00" id="price" name="campground[price]" required>
+                        <div class="invalid-feedback">
+                            Please enter a number not less than 0.
+                        </div> 
+                    </div>  
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea class="form-control" id="description" name="campground[description]" required></textarea>
+                    <div class="invalid-feedback">
+                        Desciption must be more than 10 words.
+                    </div>
+                </div>
+                <!-- upload local image to db-->
+                <div class="mb-3">
+                    <label for="formFileMultiple" class="form-label">Images</label>
+                    <div class="input-group mb-3">
+                        <input type="file" class="form-control" id="formFileMultiple" name="image" multiple>
+                        <label class="input-group-text" for="formFileMultiple">Upload</label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Add Campground</button>
+                </div>
+            </form>
+            <a href="/campgrounds">All Campgrounds</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+

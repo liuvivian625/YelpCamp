@@ -1,0 +1,26 @@
+<!-- error 页面 -->
+<% layout('layouts/boilerplate') %>
+    <div class="row">
+        <!--col-6 offset-3 即center第一个col-->
+        <div class="col-6 offset-3">
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">
+                    <%= err.message %>
+                </h4>
+                <!-- 
+                process.env.NODE_ENV 是 Node.js 环境中用于指定当前运行环境的一个环境变量。
+                它常被用来区分开发、测试和生产环境，以便在不同的环境中采取不同的配置和操作。
+                取值有:
+                development: 开发环境。在这个环境下，通常会启用详细的日志记录和调试信息，以及未压缩的代码和资源文件。
+                production: 生产环境。在这个环境下，通常会禁用详细的日志记录和调试信息，并启用优化的代码和资源文件，以提高性能。
+                test: 测试环境。在这个环境下，通常会启用特定的测试配置，如使用测试数据库或禁用某些服务，以便于进行自动化测试。
+                可以在console指定环境运行： NODE_ENV=production node app.js
+                -->
+                <% if(process.env.NODE_ENV !=="production" ){ %>
+                    <p>
+                        <%= err.stack %>
+                    </p>
+                <% } %>
+            </div>
+        </div>
+    </div>

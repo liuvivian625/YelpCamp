@@ -1,0 +1,68 @@
+<% layout('layouts/boilerplate') %>
+<div class="container py-3">
+    <h1 class="text-center">Edit Campground</h1>
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-sm-12">
+            <form action="/campgrounds/<%= campground._id %>?_method=PUT" method="post" novalidate class="needs-validation" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title" name="campground[title]" value="<%= campground.title %>" required>
+                    <div class="invalid-feedback">
+                        Please enter a title.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <input type="text" class="form-control" id="location" name="campground[location]" value="<%= campground.location %>" required>
+                    <div class="invalid-feedback">
+                        Please enter a location, format: city, state.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">$</span>
+                        <input type="number" min="0" class="form-control" placeholder="0.00" id="price" name="campground[price]" value="<%= campground.price %>" required>
+                        <div class="invalid-feedback">
+                            Please enter a number not less than 0.
+                        </div> 
+                    </div>   
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea class="form-control" id="description" name="campground[description]" required><%= campground.description %></textarea>
+                    <div class="invalid-feedback">
+                        Desciption must be more than 10 words.
+                    </div>
+                </div>
+                <!-- upload local image to db-->
+                <div class="mb-3">
+                    <label for="formFileMultiple" class="form-label">Images</label>
+                    <div class="input-group">
+                        <input type="file" class="form-control" id="formFileMultiple" name="image" multiple>
+                        <label class="input-group-text" for="formFileMultiple">Upload</label>
+                    </div>
+                </div>
+                <!-- delete image 先得到哪些图片要删除：通过checkbox选择要删除的图片，将其url存在deleteImages这个array中-->
+                <!-- campground的controller中从这个deleteImages array读取要删除的图片，从campground.images这个array中删除匹配的图片-->
+                <div class="mb-3">
+                    <% campground.images.forEach(function (img, i) { %>
+                        <!--注意src的尖括号中不要包含空格，会出错 -->
+                        <img src="<%=img.thumbnail%>" class="img-thumbnail" alt="...">
+                        <div class="form-check">
+                            <!-- name见schemas.js， value即这个deleteImages这个array中存储的值-->
+                            <input class="form-check-input" type="checkbox" value="<%=img.filename%>" name="deleteImages[]" id="image-<%=i%>">
+                            <label class="form-check-label" for="image-<%=i%>">
+                                Delete
+                            </label>
+                        </div>
+                    <% }) %>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Save Campground</button>
+                </div>
+            </form>
+            <a href="/campgrounds/<%= campground._id %>">Back to Campground</a>
+        </div>
+    </div>
+</div>

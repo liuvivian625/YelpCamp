@@ -1,0 +1,45 @@
+<!-- boilerplate：用于指代重复使用的代码模式或模板。-->
+<!-- 这个术语源于印刷行业，最初指的是用来批量印刷的固定模板。-->
+<!-- 这里创建一个boilerplate，其他页面使用这个模版，简化重复代码-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/base.css">
+    
+    <script crossorigin="anonymous" src="https://cdn.maptiler.com/maptiler-sdk-js/v2.0.3/maptiler-sdk.umd.min.js"></script>
+    <link crossorigin="anonymous" href="https://cdn.maptiler.com/maptiler-sdk-js/v2.0.3/maptiler-sdk.css" rel="stylesheet">
+    
+    <title>YelpCamp</title>
+</head>
+
+<body class="d-flex flex-column vh-100">
+    <!-- 导入partials中的ejs-->
+    <%- include("../partials/navbar") %>
+    <!--main是语义化标签，包含了页面的主要信息，每个文档中只能有一个 main 元素-->
+    <!--非主要信息：比如navbar, footer-->
+    <main class="container mt-5">
+        <%- include("../partials/flash") %>
+        <!-- 其他页面使用boilerplate时会将内容传入body，- 表示未转义-->
+        <%- body %>
+    </main>
+    <%- include("../partials/footer") %>
+    <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+
+    <!-- 因为app.js中设置了静态文件目录，所以这里不要再写/public, 位置在public目录下-->
+    <!-- 需写在bootstrap之后-->
+    <script src="/js/validateForms.js"></script>
+
+    <!--使用script标签就可以在html/ejs脚本中其中写js-->
+</body>
+
+</html>
