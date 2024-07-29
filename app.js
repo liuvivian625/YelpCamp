@@ -98,7 +98,7 @@ app.use(
 
 //Connect-Mongo settings: store sessions in Mongo
 const store = MongoStore.create({
-    mongoUrl: dbUrlLocal,
+    mongoUrl: dbUrl,
     secret: 'thisshouldbeabettersecret!', 
     touchAfter: 24 * 60 * 60,//time period in seconds (这里是24hours), lazy update the session
 
@@ -201,6 +201,7 @@ app.use((err, req, res, next) => {
 })
 
 //以上是路由和中间件的定义，设置好后再listen启动服务器
-app.listen(3000, () => {
-    console.log("APP IS LISTENING ON PORT 3000!")
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`APP IS LISTENING ON PORT ${port}`)
 });
