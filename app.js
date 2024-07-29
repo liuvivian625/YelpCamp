@@ -22,7 +22,8 @@ const dbUrlLocal = process.env.DB_URL_LOCAL;
 
 
 //Deploy: Mongo Altas setting
-const dbUrl = process.env.DB_URL;
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelpcampdb';
+/*
 const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
 async function run() {
   try {
@@ -36,9 +37,9 @@ async function run() {
   }
 }
 run().catch(console.dir);
+*/
 
-/*
-mongoose.connect(dbUrlLocal)
+mongoose.connect(dbUrl)
     .then(() => {
         console.log("MONGO CONNECTION OPEN!!!")
     })
@@ -46,7 +47,6 @@ mongoose.connect(dbUrlLocal)
         console.log("OH NO MONGO CONNECTION ERROR!!!!")
         console.log(err)
     });
-*/
 
 
 const usersRoutes = require('./routes/users');
@@ -101,7 +101,6 @@ const store = MongoStore.create({
     mongoUrl: dbUrl,
     secret: 'thisshouldbeabettersecret!', 
     touchAfter: 24 * 60 * 60,//time period in seconds (这里是24hours), lazy update the session
-
 });
 
 store.on("error", function(e){
